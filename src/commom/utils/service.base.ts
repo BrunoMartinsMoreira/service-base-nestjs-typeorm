@@ -7,6 +7,18 @@ import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity
 import { Pagination } from '../types/Pagination';
 import { httpExceptionHandler } from './httpExceptionHandler';
 
+/**
+ * exemplo de classe para abstrair/facilitar operações de crud
+ * possui metodos de validar campos unicos e todos os metodos de crud
+ * bem como é possível buscar entidades relacionadas, nesse exemplo
+ * está acoplada ao typeorm devido ser o orm que usamos em praticamente
+ * todos os projetos, mas a ideia principal é ter uma classe base pra que não seja
+ * necessário escrever todos os metodos de crud em todos os services, focando nas
+ * regras de negócioe adicionando agilidade ao desenvolvimento
+ * Por padrão deve ser passada a entidade do typeorm para a qual se deseja criar
+ * os metodos de crud como tipo genérico ao extender a classe, e no super, passar o
+ * repository referente a entidade passada como tipo generico, os métodos dessa classe utilizam tipagens do proprio typeorm para os parametros de cada um
+ *  */
 @Injectable()
 export class ServiceBase<T> {
   constructor(protected repository: Repository<T>) {}
